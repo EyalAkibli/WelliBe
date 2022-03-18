@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "141630952797",
+    "project_id": "wellibe-6e6ac",
+    "storage_bucket": "wellibe-6e6ac.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:141630952797:android:da47841f4911aba90984b4",
+        "android_client_info": {
+          "package_name": "com.example.wellibe"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "141630952797-ic95l2c9k2r8l0bldccbkb0tstiol49d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.wellibe",
+            "certificate_hash": "c1fc8ee18ec03e5f53dffd45ecfb7337d0612d02"
+          }
+        },
+        {
+          "client_id": "141630952797-q6q0he8nmlfhmb7kuq8f1fpuqhittu49.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBnLef0TWzLVe2ucYMmuXnjrnRpq9gIYM8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "141630952797-q6q0he8nmlfhmb7kuq8f1fpuqhittu49.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
