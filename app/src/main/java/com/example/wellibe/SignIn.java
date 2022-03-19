@@ -1,10 +1,11 @@
 package com.example.wellibe;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
 
-public class SignIn extends AppCompatActivity {
+public class SignIn extends WelliBeActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
