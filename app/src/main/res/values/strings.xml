@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">WelliBe</string>
+    <string name="home">Home</string>
+    <string name="my_visits">My Visits</string>
+    <string name="new_visit">New Visit</string>
+    <string name="Settings">Settings</string>
+    <string name="Logout">Logout</string>
+    <string name="open_drawer">Open</string>
+    <string name="close_drawer">Close</string>
 </resources>

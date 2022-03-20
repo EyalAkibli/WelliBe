@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/home"
+            android:icon="@drawable/ic_baseline_home_24"
+            android:title="@string/home" />
+        <item
+            android:id="@+id/add_new_visit"
+            android:icon="@drawable/ic_baseline_post_add_24"
+            android:title="@string/new_visit" />
+        <item
+            android:id="@+id/view_my_visits"
+            android:icon="@drawable/ic_baseline_format_list_bulleted_24"
+            android:title="@string/my_visits" />
+    </group>
+    <group android:checkableBehavior="single">
+        <item android:title="@string/Settings">
+            <menu>
+                <item
+                    android:id="@+id/logout"
+                    android:icon="@drawable/ic_baseline_exit_to_app_24"
+                    android:title="@string/Logout" />
+            </menu>
+        </item>
+    </group>
+</menu>
