@@ -1,6 +1,7 @@
 package com.example.wellibe;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -14,6 +15,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.protobuf.NullValue;
 
 public class WelliBeActivity extends AppCompatActivity {
     /**
@@ -45,10 +47,10 @@ public class WelliBeActivity extends AppCompatActivity {
         switch (this.toolBarMode) {
             case NO_BUTTONS:
                 getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-                drawerLayout.setDrawerLockMode(DrawerLayout. LOCK_MODE_LOCKED_CLOSED);
-                break;
             case ONLY_BACK:
-                drawerLayout.setDrawerLockMode(DrawerLayout. LOCK_MODE_LOCKED_CLOSED);
+                if (drawerLayout != null) {
+                    drawerLayout.setDrawerLockMode(DrawerLayout. LOCK_MODE_LOCKED_CLOSED);
+                }
                 break;
             case ONLY_HAMBURGER:
                 getSupportActionBar().setDisplayHomeAsUpEnabled(false);

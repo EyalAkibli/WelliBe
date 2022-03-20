@@ -8,4 +8,6 @@
     <string name="open_drawer">Open</string>
     <string name="close_drawer">Close</string>
     <string name="help">Help</string>
+    <string name="sign_in">Sign-In</string>
+    <string name="sign_up">Sign-Up</string>
 </resources>
