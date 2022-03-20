@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WelliBe">
         <activity
+            android:name=".Home"
+            android:exported="false" />
+        <activity
             android:name=".WelliBeActivity"
             android:exported="false" />
         <activity
