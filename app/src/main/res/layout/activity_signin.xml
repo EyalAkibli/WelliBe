@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <include
-            android:id="@+id/tool_bar_back_hamburger"
+            android:id="@+id/tool_bar_back_menu"
             layout="@layout/tool_bar"
             />
     </com.google.android.material.appbar.AppBarLayout>

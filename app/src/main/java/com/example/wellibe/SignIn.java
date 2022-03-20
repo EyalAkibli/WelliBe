@@ -9,6 +9,7 @@ public class SignIn extends WelliBeActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        toolBarMode = ToolBarMode.NO_BUTTONS;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signin);
     }
