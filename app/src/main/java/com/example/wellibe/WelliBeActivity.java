@@ -77,6 +77,9 @@ public class WelliBeActivity extends AppCompatActivity {
                 case R.id.view_my_visits:
 
                     break;
+                case R.id.help:
+                    Toast.makeText(getApplicationContext(), "Not yet Supported.", Toast.LENGTH_SHORT).show();
+                    break;
                 case R.id.logout:
                     //LogoutProcedure();
                     Toast.makeText(getApplicationContext(), "Logging out..", Toast.LENGTH_SHORT).show();

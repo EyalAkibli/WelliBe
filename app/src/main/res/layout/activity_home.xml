@@ -11,7 +11,8 @@
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        >
         <include
             android:id="@+id/tool_bar_back_menu"
             layout="@layout/tool_bar" />
@@ -28,6 +29,9 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:theme="@style/NavigationView"
+        app:itemBackground="@color/menu_item_color_state"
         app:headerLayout="@layout/nav_drawer_header"
-        app:menu="@menu/drawer_menu" />
+        app:menu="@menu/drawer_menu"/>
+        <!--android:background="@color/gray"-->
+
 </androidx.drawerlayout.widget.DrawerLayout>
