@@ -1,25 +1,24 @@
 package com.example.wellibe;
 
 import static com.example.wellibe.WelliBeActivity.ToolBarMode.NO_BUTTONS;
-import static com.example.wellibe.WelliBeActivity.ToolBarMode.ONLY_BACK;
-import static com.example.wellibe.WelliBeActivity.ToolBarMode.ONLY_HAMBURGER;
-
-import static java.util.Objects.*;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.viewpager.widget.PagerAdapter;
-import androidx.viewpager2.widget.ViewPager2;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
+import android.util.Patterns;
+import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.example.wellibe.databinding.ActivitySigninBinding;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+import com.google.firebase.auth.FirebaseUser;
 
-import java.util.Objects;
 
 public class SignIn extends WelliBeActivity {
 
@@ -40,19 +39,67 @@ public class SignIn extends WelliBeActivity {
         new TabLayoutMediator(binding.tabsSignInSignOut, binding.viewPager, new TabLayoutMediator.TabConfigurationStrategy() {
             @Override
             public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
-                tab.setText(ViewPagerFragmentAdapter.tabTitles[1]);
-                //binding.tabsSignInSignOut.selectTab(tab);
-                //mainBinding.pager.setCurrentItem(tab.position, true)
+                tab.setText(ViewPagerFragmentAdapter.tabTitles[position]);
             }
         }).attach();
+    }
 
-        /*binding.viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
-            @Override
-            public void onPageSelected(int position) {
-                binding.tabsSignInSignOut.selectTab(binding.tabsSignInSignOut.getTabAt(position));
-            }
-        });*/
+    @Override
+    protected void onResume() {
+        super.onResume();
+        connectivityFlag = checkInternetConnectivity();
+        if (connectivityFlag) {
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+            CheckUserSignedIn();
+            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+        }
+    }
 
+    public static boolean isValidLoginInput(Context context, String email, String password) {
+        if (email.isEmpty()) {
+            Toast.makeText(context, "Email is required. Please try again",
+                    Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (password.isEmpty()) {
+            Toast.makeText(context, "Password is required. Please try again",
+                    Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            Toast.makeText(context, "Invalid email. Please try again",
+                    Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (password.length() < 6) {
+            Toast.makeText(context, "Minimum length of password is 6", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
+    }
 
+    public void CheckUserSignedIn() {
+        FirebaseUser user = mAuth.getCurrentUser();
+        if (user != null) {
+            user.reload().addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if (!task.isSuccessful()) {
+                        //User has been disabled, deleted or login credentials are no longer valid,
+                        //send to Login screen
+                        if (!getLocalClassName().equals("SignIn")) {
+                            Intent i = new Intent(getApplicationContext(), SignIn.class);
+                            finish();
+                            startActivity(i);
+                        }
+                    } else { //task was successful
+                        Intent i = new Intent(getApplicationContext(), Home.class);
+                        finish();
+                        startActivity(i);
+                    }
+                }
+            });
+        }
     }
 }
+

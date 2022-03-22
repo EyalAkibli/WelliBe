@@ -23,7 +23,8 @@
             android:exported="false" />
         <activity
             android:name=".SignIn"
-            android:exported="true">
+            android:exported="true"
+            android:windowSoftInputMode="stateVisible|adjustPan">
 
         </activity>
     </application>

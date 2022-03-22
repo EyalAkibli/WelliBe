@@ -27,6 +27,5 @@ public class Home extends WelliBeActivity {
         initToolbar();
 
         setupDrawerContentActions(findViewById(R.id.navigation_view));
-
     }
 }

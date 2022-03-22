@@ -9,12 +9,19 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.protobuf.NullValue;
 
 public class WelliBeActivity extends AppCompatActivity {
@@ -32,12 +39,27 @@ public class WelliBeActivity extends AppCompatActivity {
     }
 
     ToolBarMode toolBarMode;
+    public static FirebaseAuth mAuth;
+    public static boolean connectivityFlag = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        mAuth = FirebaseAuth.getInstance();
         super.onCreate(savedInstanceState);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        connectivityFlag = checkInternetConnectivity();
+        if (!connectivityFlag && !this.getLocalClassName().equals("SignIn")) {
+            Toast.makeText(getApplicationContext(), "Internet Connectivity is lost. Returning to Sign-In screen.", Toast.LENGTH_SHORT).show();
+            Intent backToSignIn = new Intent(this, SignIn.class);
+            finish();
+            startActivity(backToSignIn);
+        }
     }
 
     public void initToolbar() {
@@ -83,8 +105,10 @@ public class WelliBeActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Not yet Supported.", Toast.LENGTH_SHORT).show();
                     break;
                 case R.id.logout:
-                    //LogoutProcedure();
                     Toast.makeText(getApplicationContext(), "Logging out..", Toast.LENGTH_SHORT).show();
+                    if (mAuth.getCurrentUser() != null) {
+                        mAuth.signOut();
+                    }
                     Intent backToSignIn = new Intent(getApplicationContext(), SignIn.class);
                     finish();
                     startActivity(backToSignIn);
@@ -102,6 +126,16 @@ public class WelliBeActivity extends AppCompatActivity {
             drawerLeft.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
+        }
+    }
+
+    public boolean checkInternetConnectivity() {
+        ConnectivityManager cm = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+            return true;
+        } else {
+            return false;
         }
     }
 }
