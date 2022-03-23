@@ -10,6 +10,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.text.Spannable;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,7 +58,18 @@ public class SignInFragment extends WelliBeFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        String signUpOffer = getResources().getString(R.string.sign_up_offer);
+        int start = signUpOffer.indexOf("S");
+        int end = signUpOffer.indexOf(".");
+        binding.tvSignUpOffer.setMovementMethod(LinkMovementMethod.getInstance());
+        //binding.tvSignInOffer.setText(signInOffer, TextView.BufferType.SPANNABLE);
+        ClickableSpan myClickableSpan = new ClickableSpan() {
+            @Override
+            public void onClick(@NonNull View view) {
+                SignIn.transitionFrags(1);
+            }
+        };
+        ((Spannable) binding.tvSignUpOffer.getText()).setSpan(myClickableSpan, start, end + 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
     }
 
     @Override

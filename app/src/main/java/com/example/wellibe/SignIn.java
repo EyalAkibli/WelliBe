@@ -3,6 +3,7 @@ package com.example.wellibe;
 import static com.example.wellibe.WelliBeActivity.ToolBarMode.NO_BUTTONS;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -22,8 +23,8 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class SignIn extends WelliBeActivity {
 
-    ViewPagerFragmentAdapter viewPagerFragmentAdapter;
-    private ActivitySigninBinding binding;
+    public ViewPagerFragmentAdapter viewPagerFragmentAdapter;
+    private static ActivitySigninBinding binding;
     float v = 0;
 
     @Override
@@ -105,6 +106,10 @@ public class SignIn extends WelliBeActivity {
                 }
             });
         }
+    }
+
+    public static void transitionFrags(int i) {
+        binding.viewPager.setCurrentItem(i);
     }
 }
 

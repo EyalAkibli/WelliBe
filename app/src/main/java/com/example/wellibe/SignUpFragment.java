@@ -13,6 +13,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.text.Spannable;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -86,6 +89,19 @@ public class SignUpFragment extends WelliBeFragment {
                 }
             }
         });
+
+        String signInOffer = getResources().getString(R.string.sign_in_offer);
+        int start = signInOffer.indexOf("S");
+        int end = signInOffer.indexOf(".");
+        binding.tvSignInOffer.setMovementMethod(LinkMovementMethod.getInstance());
+        //binding.tvSignInOffer.setText(signInOffer, TextView.BufferType.SPANNABLE);
+        ClickableSpan myClickableSpan = new ClickableSpan() {
+            @Override
+            public void onClick(@NonNull View view) {
+                SignIn.transitionFrags(0);
+            }
+        };
+        ((Spannable) binding.tvSignInOffer.getText()).setSpan(myClickableSpan, start, end + 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
     }
 
     private void createAccount(final String userName, final String email, final String password) {
