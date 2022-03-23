@@ -22,8 +22,15 @@
     <string name="login_failed">"Login failed"</string>
     <string name="prompt_confirm_password">Confirm password</string>
     <string name="user_name">User name</string>
-    <string name="sign_in_intro">Circles of Gratitude</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="banner_intro">Circles of Gratitude</string>
+    <string name="sign_up_offer">Don\'t have an account? <font color='#01C6DB'>Sign Up.</font></string>
+    <string name="sign_in_offer">Already have an account? <font color='#01C6DB'>Sign In.</font></string>
+
+    <string-array name="doctor_patient_str_array">
+        <item> ---Select--- </item>
+        <item>Patient</item>
+        <item>Doctor</item>
+    </string-array>
+
 
 </resources>

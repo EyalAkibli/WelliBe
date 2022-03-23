@@ -3,7 +3,9 @@ package com.example.wellibe;
 import static com.example.wellibe.WelliBeActivity.connectivityFlag;
 import static com.example.wellibe.WelliBeActivity.mAuth;
 
+import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Binder;
 import android.os.Bundle;
 
@@ -14,6 +16,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.wellibe.databinding.FragmentSignUpBinding;
@@ -31,6 +35,7 @@ import java.util.List;
 public class SignUpFragment extends WelliBeFragment {
 
     private FragmentSignUpBinding binding;
+    protected String job;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -42,6 +47,22 @@ public class SignUpFragment extends WelliBeFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        binding.spinnerDocPat.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (i == 0) {
+                    ((TextView) adapterView.getChildAt(0)).setTextColor(getResources().getColor(R.color.colorSecondaryLight));
+                } else {
+                    job = (String) binding.spinnerDocPat.getItemAtPosition(i);
+                    Toast.makeText(getActivity(), job, Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
         binding.btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

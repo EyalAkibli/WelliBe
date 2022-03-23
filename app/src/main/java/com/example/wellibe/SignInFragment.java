@@ -37,14 +37,17 @@ public class SignInFragment extends WelliBeFragment {
         binding.etEmail.setTranslationX(800);
         binding.etPassword.setTranslationX(800);
         binding.btnLogin.setTranslationX(800);
+        binding.tvSignUpOffer.setTranslationX(800);
         binding.tvBanner.setAlpha(v);
         binding.etEmail.setAlpha(v);
         binding.etPassword.setAlpha(v);
         binding.btnLogin.setAlpha(v);
+        binding.tvSignUpOffer.setAlpha(v);
         binding.tvBanner.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(300).start();
         binding.etEmail.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(500).start();
         binding.etPassword.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(500).start();
         binding.btnLogin.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(700).start();
+        binding.tvSignUpOffer.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(700).start();
 
         return binding.getRoot();
     }
