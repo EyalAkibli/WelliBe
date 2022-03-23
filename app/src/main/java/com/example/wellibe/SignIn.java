@@ -24,6 +24,7 @@ public class SignIn extends WelliBeActivity {
 
     ViewPagerFragmentAdapter viewPagerFragmentAdapter;
     private ActivitySigninBinding binding;
+    float v = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +36,10 @@ public class SignIn extends WelliBeActivity {
 
         viewPagerFragmentAdapter = new ViewPagerFragmentAdapter(this);
         binding.viewPager.setAdapter(viewPagerFragmentAdapter);
+
+        binding.tabsSignInSignOut.setTranslationX(800);
+        binding.tabsSignInSignOut.setAlpha(v);
+        binding.tabsSignInSignOut.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(200).start();
 
         new TabLayoutMediator(binding.tabsSignInSignOut, binding.viewPager, new TabLayoutMediator.TabConfigurationStrategy() {
             @Override

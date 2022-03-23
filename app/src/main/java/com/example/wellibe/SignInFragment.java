@@ -26,11 +26,26 @@ import com.google.firebase.auth.FirebaseUser;
 public class SignInFragment extends WelliBeFragment {
 
     private FragmentSignInBinding binding;
+    float v = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentSignInBinding.inflate(inflater, container, false);
+
+        binding.tvBanner.setTranslationX(800);
+        binding.etEmail.setTranslationX(800);
+        binding.etPassword.setTranslationX(800);
+        binding.btnLogin.setTranslationX(800);
+        binding.tvBanner.setAlpha(v);
+        binding.etEmail.setAlpha(v);
+        binding.etPassword.setAlpha(v);
+        binding.btnLogin.setAlpha(v);
+        binding.tvBanner.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(300).start();
+        binding.etEmail.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(500).start();
+        binding.etPassword.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(500).start();
+        binding.btnLogin.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(700).start();
+
         return binding.getRoot();
     }
 
