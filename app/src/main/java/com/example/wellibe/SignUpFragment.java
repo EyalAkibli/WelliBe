@@ -38,7 +38,6 @@ import java.util.List;
 public class SignUpFragment extends WelliBeFragment {
 
     private FragmentSignUpBinding binding;
-    protected String job;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -56,8 +55,12 @@ public class SignUpFragment extends WelliBeFragment {
                 if (i == 0) {
                     ((TextView) adapterView.getChildAt(0)).setTextColor(getResources().getColor(R.color.colorSecondaryLight));
                 } else {
-                    job = (String) binding.spinnerDocPat.getItemAtPosition(i);
-                    Toast.makeText(getActivity(), job, Toast.LENGTH_SHORT).show();
+                    if (i == 1) {
+                        WelliBeActivity.job = WelliBeActivity.Job.Patient;
+                    } else { // i == 2
+                        WelliBeActivity.job = WelliBeActivity.Job.Doctor;
+                    }
+                    Toast.makeText(getActivity(), WelliBeActivity.job.name(), Toast.LENGTH_SHORT).show();
                 }
             }
 

@@ -8,7 +8,9 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
 
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -38,6 +40,12 @@ public class WelliBeActivity extends AppCompatActivity {
         ONLY_HAMBURGER
     }
 
+    public enum Job {
+        Doctor,
+        Patient
+    }
+
+    static Job job;
     ToolBarMode toolBarMode;
     public static FirebaseAuth mAuth;
     public static boolean connectivityFlag = true;
@@ -93,13 +101,20 @@ public class WelliBeActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.home:
-
+                    Fragment myFragment = getSupportFragmentManager().findFragmentById(R.id.drawer_layout_fragment_container);
+                    assert myFragment != null;
+                    if (myFragment.getClass() != HomeFragment.class && myFragment.isVisible()) {
+                        getSupportFragmentManager().beginTransaction().replace(R.id.drawer_layout_fragment_container,
+                                new HomeFragment(), "start activity fragment").commit();
+                    }
                     break;
                 case R.id.add_new_visit:
-
+                    getSupportFragmentManager().beginTransaction().replace(R.id.drawer_layout_fragment_container,
+                                                                           new NewVisitFragment()).commit();
                     break;
                 case R.id.view_my_visits:
-
+                    getSupportFragmentManager().beginTransaction().replace(R.id.drawer_layout_fragment_container,
+                                                                           new MyVisitsFragment()).commit();
                     break;
                 case R.id.help:
                     Toast.makeText(getApplicationContext(), "Not yet Supported.", Toast.LENGTH_SHORT).show();
@@ -113,7 +128,9 @@ public class WelliBeActivity extends AppCompatActivity {
                     finish();
                     startActivity(backToSignIn);
                     break;
-            }
+                }
+                final DrawerLayout drawerLeft = findViewById(R.id.drawer_layout);
+                drawerLeft.closeDrawers();
                 return true;
             }
         });
