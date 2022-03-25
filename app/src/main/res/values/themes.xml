@@ -35,6 +35,8 @@
         <item name="android:textColor">?attr/itemTextColor</item>
     </style>
 
-
+    <style name="FabTransparent" parent="WelliBe">
+        <item name="colorAccent">@android:color/transparent</item>
+    </style>
 
 </resources>

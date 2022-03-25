@@ -25,6 +25,10 @@
     <string name="banner_intro">Circles of Gratitude</string>
     <string name="sign_up_offer">Don\'t have an account? <font color='#01C6DB'>Sign Up.</font></string>
     <string name="sign_in_offer">Already have an account? <font color='#01C6DB'>Sign In.</font></string>
+    <string name="hello_blank_fragment">Home DELETE ME</string>
+    <string name="scan_dr_qr_code">Press to scan the Dr\'s QR-Code</string>
+    <string name="new_visit_summary_prompt">What did the doctor tell you?</string>
+    <string name="save_new_visit">Save new visit</string>
 
     <string-array name="doctor_patient_str_array">
         <item> ---Select--- </item>

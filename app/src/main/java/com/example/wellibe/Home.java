@@ -37,10 +37,14 @@ public class Home extends WelliBeActivity {
         }
         initToolbar();
         setupDrawerContentActions(findViewById(R.id.navigation_view));
-
-        setDoctorPatientUI(WelliBeActivity.job);
+//
+//        setDoctorPatientUI(WelliBeActivity.job);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
 
     protected void setDoctorPatientUI(WelliBeActivity.Job j) {
         //if (j == Job.Patient) {

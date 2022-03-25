@@ -15,5 +15,6 @@
     <color name="colorSecondaryDark">#c41c00</color>
     <color name="colorSecondaryLight">#ff8a50</color>
     <color name="gray">#fafafa</color>
+    <color name="linkColor">#0000EE</color>
 
 </resources>

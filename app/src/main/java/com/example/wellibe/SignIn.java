@@ -3,9 +3,6 @@ package com.example.wellibe;
 import static com.example.wellibe.WelliBeActivity.ToolBarMode.NO_BUTTONS;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentManager;
-
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,7 +22,6 @@ public class SignIn extends WelliBeActivity {
 
     public ViewPagerFragmentAdapter viewPagerFragmentAdapter;
     private static ActivitySigninBinding binding;
-    float v = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,10 +33,6 @@ public class SignIn extends WelliBeActivity {
 
         viewPagerFragmentAdapter = new ViewPagerFragmentAdapter(this);
         binding.viewPager.setAdapter(viewPagerFragmentAdapter);
-
-        binding.tabsSignInSignOut.setTranslationX(800);
-        binding.tabsSignInSignOut.setAlpha(v);
-        binding.tabsSignInSignOut.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(200).start();
 
         new TabLayoutMediator(binding.tabsSignInSignOut, binding.viewPager, new TabLayoutMediator.TabConfigurationStrategy() {
             @Override
@@ -101,6 +93,7 @@ public class SignIn extends WelliBeActivity {
                     } else { //task was successful
                         Intent i = new Intent(getApplicationContext(), Home.class);
                         finish();
+                        i.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                         startActivity(i);
                     }
                 }
