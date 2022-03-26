@@ -132,8 +132,7 @@ public class SignUpFragment extends WelliBeFragment {
                 if (task.isSuccessful()) {
                     user.put("Full name", fullName);
                     user.put("Email", email);
-                    user.put("Job", WelliBeActivity.job.name().substring(0,1) +
-                            WelliBeActivity.job.name().substring(1).toLowerCase(Locale.ROOT));
+                    user.put("Job", WelliBeActivity.job.name());
 
                     String userId = mAuth.getCurrentUser().getUid();
                     WelliBeActivity.db.collection("Users").document(userId).set(user).
