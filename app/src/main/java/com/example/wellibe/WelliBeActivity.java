@@ -31,6 +31,10 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.protobuf.NullValue;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class WelliBeActivity extends AppCompatActivity {
     /**
      * For Initializing toolbar layout:
@@ -113,7 +117,7 @@ public class WelliBeActivity extends AppCompatActivity {
                     assert myFragment != null;
                     if (myFragment.getClass() != HomeFragment.class && myFragment.isVisible()) {
                         getSupportFragmentManager().beginTransaction().replace(R.id.drawer_layout_fragment_container,
-                                new HomeFragment(), "start activity fragment").commit();
+                                new HomeFragment()).commit();
                     }
                     break;
                 case R.id.add_new_visit:
@@ -173,4 +177,10 @@ public class WelliBeActivity extends AppCompatActivity {
         return super.dispatchTouchEvent(ev);
     }
 
+
+    public static String getTimeDate(long timestamp) {
+            Date netDate = (new Date(timestamp));
+            SimpleDateFormat sfd = new SimpleDateFormat("EEE, yyyy.MM.dd G 'at' HH:mm:ss", Locale.getDefault());
+            return sfd.format(netDate);
+    }
 }

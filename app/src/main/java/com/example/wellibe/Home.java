@@ -42,11 +42,11 @@ public class Home extends WelliBeActivity {
         initToolbar();
         setupDrawerContentActions(findViewById(R.id.navigation_view));
 //
-//        setDoctorPatientUI(WelliBeActivity.job);
+        setDoctorPatientUI(WelliBeActivity.job);
     }
 
     protected void setDoctorPatientUI(WelliBeActivity.Job j) {
-        //if (j == Job.Patient) {
+        //if (j == Job.PATIENT) {
 
         //} else { //j == Job.Doctor
             //binding.navigationView.getMenu().findItem(R.id.add_new_visit).setVisible(false);
