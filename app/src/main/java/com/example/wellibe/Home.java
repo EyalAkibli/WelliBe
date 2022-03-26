@@ -11,13 +11,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 
 import com.example.wellibe.databinding.ActivityHomeBinding;
 import com.example.wellibe.databinding.ActivitySigninBinding;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseUser;
 
 public class Home extends WelliBeActivity {
 
@@ -39,11 +43,6 @@ public class Home extends WelliBeActivity {
         setupDrawerContentActions(findViewById(R.id.navigation_view));
 //
 //        setDoctorPatientUI(WelliBeActivity.job);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
     }
 
     protected void setDoctorPatientUI(WelliBeActivity.Job j) {

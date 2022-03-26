@@ -25,19 +25,28 @@ import android.widget.Toast;
 
 import com.example.wellibe.databinding.FragmentSignUpBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.auth.SignInMethodQueryResult;
+import com.google.firebase.firestore.DocumentReference;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Objects;
 
 
 public class SignUpFragment extends WelliBeFragment {
 
     private FragmentSignUpBinding binding;
+    Map<String, Object> user = new HashMap<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -56,11 +65,12 @@ public class SignUpFragment extends WelliBeFragment {
                     ((TextView) adapterView.getChildAt(0)).setTextColor(getResources().getColor(R.color.colorSecondaryLight));
                 } else {
                     if (i == 1) {
-                        WelliBeActivity.job = WelliBeActivity.Job.Patient;
+                        //user.put("Job", ((TextView) adapterView.getChildAt(0)).getText());
+                        WelliBeActivity.job = WelliBeActivity.Job.PATIENT;
                     } else { // i == 2
-                        WelliBeActivity.job = WelliBeActivity.Job.Doctor;
+                        WelliBeActivity.job = WelliBeActivity.Job.DOCTOR;
                     }
-                    Toast.makeText(getActivity(), WelliBeActivity.job.name(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), ((TextView) adapterView.getChildAt(0)).getText(), Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -75,11 +85,14 @@ public class SignUpFragment extends WelliBeFragment {
                 if (!connectivityFlag) {
                     Toast.makeText(getActivity(), "Make sure you have an Internet Connection and then restart PubLeague.", Toast.LENGTH_LONG).show();
                 } else {
-                    String userName = binding.etUserName.getText().toString();
+                    String fullName = binding.etFullName.getText().toString();
                     String email = binding.etEmail.getText().toString();
                     String password = binding.etPass.getText().toString();
                     String confirmPass = binding.etConfirmPass.getText().toString();
-                    if (email.trim().isEmpty() || password.trim().isEmpty() || userName.trim().isEmpty()
+                    if (WelliBeActivity.job == WelliBeActivity.Job.NOT_SELECTED) {
+                        Toast.makeText(getActivity(),
+                                "Please choose between patient and doctor", Toast.LENGTH_SHORT).show();
+                    } else if (email.trim().isEmpty() || password.trim().isEmpty() || fullName.trim().isEmpty()
                             || confirmPass.trim().isEmpty()) {
                         Toast.makeText(getActivity(),
                                 "Sign up has failed. Some fields are empty", Toast.LENGTH_LONG).show();
@@ -87,7 +100,8 @@ public class SignUpFragment extends WelliBeFragment {
                         Toast.makeText(getActivity(),
                                 "'Password Confirmation' Doesn't Match 'Password'.", Toast.LENGTH_LONG).show();
                     } else {
-                        createAccount(userName, email, password);
+                        createAccount(fullName, email, password);
+                        binding.btnRegister.setEnabled(false);
                     }
                 }
             }
@@ -107,21 +121,49 @@ public class SignUpFragment extends WelliBeFragment {
         ((Spannable) binding.tvSignInOffer.getText()).setSpan(myClickableSpan, start, end + 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
     }
 
-    private void createAccount(final String userName, final String email, final String password) {
+    private void createAccount(final String fullName, final String email, final String password) {
         if (!SignIn.isValidLoginInput(getContext(), email, password)) {
+            binding.btnRegister.setEnabled(true);
             return;
         }
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    Toast.makeText(getActivity(), "Registration successful. Please sign-in.",
-                            Toast.LENGTH_LONG).show();
+                    user.put("Full name", fullName);
+                    user.put("Email", email);
+                    user.put("Job", WelliBeActivity.job.name().substring(0,1) +
+                            WelliBeActivity.job.name().substring(1).toLowerCase(Locale.ROOT));
+
+                    String userId = mAuth.getCurrentUser().getUid();
+                    WelliBeActivity.db.collection("Users").document(userId).set(user).
+                            addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                    Toast.makeText(getActivity(), "Registration successful. Welcome!",
+                                            Toast.LENGTH_LONG).show();
+                                    binding.btnRegister.setEnabled(true);
+                                    ((SignIn) getActivity()).onResume();
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    mAuth.getCurrentUser().reauthenticate(EmailAuthProvider.getCredential(email, password)).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            mAuth.getCurrentUser().delete();
+                                            Toast.makeText(getContext(), "Unexpected error has occurred. Please restart the application.",
+                                                    Toast.LENGTH_LONG).show();
+                                            getActivity().finishAffinity();
+                                        }
+                                    });
+                                }
+                            });
                     //addData(userName, email);
-                    ((SignIn) getActivity()).onResume();
+
                 } else {
                     if (task.getException() instanceof FirebaseAuthUserCollisionException) {
-                        Toast.makeText(getContext(), "The Email address is already in use by another account.",
+                        Toast.makeText(getContext(), "This Email address already Exists.",
                                 Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(getActivity(), "Authentication failed. Please try again",

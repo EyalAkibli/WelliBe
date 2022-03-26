@@ -45,15 +45,16 @@ public class WelliBeActivity extends AppCompatActivity {
         ONLY_HAMBURGER
     }
 
-    public enum Job {
-        Doctor,
-        Patient
+    public enum Job { //will be used for UI definition after sign-in
+        NOT_SELECTED,
+        DOCTOR,
+        PATIENT
     }
 
-    static Job job;
+    static Job job = Job.NOT_SELECTED;
     ToolBarMode toolBarMode;
     public static FirebaseAuth mAuth;
-    FirebaseFirestore db;
+    static FirebaseFirestore db;
     public static boolean connectivityFlag = true;
 
     @Override
