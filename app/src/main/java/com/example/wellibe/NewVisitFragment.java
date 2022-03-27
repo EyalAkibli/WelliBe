@@ -2,6 +2,7 @@ package com.example.wellibe;
 
 import static com.example.wellibe.WelliBeActivity.mAuth;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -41,6 +42,13 @@ public class NewVisitFragment extends WelliBeFragment {
             public void onClick(View view) {
                 binding.fabNewVisit.setEnabled(false);
                 addNewVisitToDB();
+            }
+        });
+        binding.ivCodeScanner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getContext(), QRcodeScanner.class);
+                startActivity(i);
             }
         });
         return binding.getRoot();

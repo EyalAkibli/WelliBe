@@ -44,13 +44,13 @@ public class SignIn extends WelliBeActivity {
 
     @Override
     protected void onResume() {
-        super.onResume();
         connectivityFlag = checkInternetConnectivity();
         if (connectivityFlag) {
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
             CheckUserSignedIn();
             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
         }
+        super.onResume();
     }
 
     public static boolean isValidLoginInput(Context context, String email, String password) {

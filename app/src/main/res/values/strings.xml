@@ -40,5 +40,7 @@
     <string name="qr_code">qr_code</string>
     <string name="scan_dr_qr_code">Press to scan the Dr\'s QR-code</string>
     <string name="action_settings">Settings</string>
+    <string name="toggle_flash">Toggle Flash</string>
+    <string name="seeking_qr_code">Seeking QR code..</string>
 
 </resources>

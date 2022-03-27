@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.wellibe">
+    <!-- Permission for camera -->
+    <uses-permission android:name="android.permission.CAMERA" /> <!-- Permission to vibrate -->
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:allowBackup="true"
@@ -10,9 +13,11 @@
         android:supportsRtl="true"
         android:theme="@style/WelliBe">
         <activity
+            android:name=".QRcodeScanner"
+            android:exported="false" />
+        <activity
             android:name=".Home"
-            android:exported="false" >
-        </activity>
+            android:exported="false" />
         <activity
             android:name=".WelliBeActivity"
             android:exported="false" />
