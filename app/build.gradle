@@ -49,6 +49,9 @@ dependencies {
     implementation 'com.google.zxing:core:3.3.3'
     implementation ('eu.livotov.labs.android:CAMView:2.0.1@aar') {transitive=true}
 
+    implementation "androidx.activity:activity:1.4.0"
+    implementation "androidx.fragment:fragment:1.4.1"
+
     // Import the Firebase BoM
     implementation platform('com.google.firebase:firebase-bom:29.3.0')
     implementation 'com.google.firebase:firebase-auth'
