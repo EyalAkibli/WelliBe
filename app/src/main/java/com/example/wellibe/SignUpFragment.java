@@ -118,7 +118,8 @@ public class SignUpFragment extends WelliBeFragment {
                     user.put("Full name", fullName);
                     user.put("Email", email);
                     user.put("Job", WelliBeActivity.job.name());
-                    user.put("Hearts received", 0);
+                    if (WelliBeActivity.job.name() == WelliBeActivity.Job.DOCTOR.name())
+                        user.put("Hearts received", 0);
                     String userId = mAuth.getCurrentUser().getUid();
                     WelliBeActivity.db.collection("Users").document(userId).set(user).
                             addOnSuccessListener(new OnSuccessListener<Void>() {

@@ -40,6 +40,23 @@ public class HomeFragment extends WelliBeFragment {
     public void onResume() {
         super.onResume();
         setDoctorPatientUI();
+        binding.btnAddNewVisit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.drawer_layout_fragment_container,
+                        new NewVisitFragment()).commit();
+                Home.binding.navigationView.setCheckedItem(R.id.add_new_visit);
+
+            }
+        });
+        binding.btnViewMyVisits.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.drawer_layout_fragment_container,
+                        new MyVisitsFragment()).commit();
+                Home.binding.navigationView.setCheckedItem(R.id.view_my_visits);
+            }
+        });
     }
 
     @Override
@@ -101,12 +118,12 @@ public class HomeFragment extends WelliBeFragment {
                     final DocumentSnapshot doc = task.getResult();
                     if (doc.exists()) {
                         if (doc.getString("Job").equals(WelliBeActivity.Job.PATIENT.name())) {
-                            binding.ivQrCode.setEnabled(false);
                             welcomeUser[0] = welcomeUser[0] + doc.getString("Full name");
-                            binding.btnHeart.setVisibility(View.GONE);
+                            binding.btnAddNewVisit.setVisibility(View.VISIBLE);
+                            binding.btnViewMyVisits.setVisibility(View.VISIBLE);
                         } else {
+                            binding.btnHeart.setVisibility(View.VISIBLE);
                             welcomeUser[0] = welcomeUser[0] + "Dr. " + doc.getString("Full name");
-                            binding.ivQrCode.setEnabled(true);
                             WindowManager manager = (WindowManager) getContext().getSystemService(WINDOW_SERVICE);
 
                             // initializing a variable for default display.

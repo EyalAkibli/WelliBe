@@ -18,6 +18,8 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@id/iv_qr_code"
+            android:textSize="24sp"
+            android:textColor="@color/black"
             android:hint="Loading.."/>
         <ImageView
             android:id="@+id/iv_qr_code"
@@ -57,7 +59,42 @@
             app:icon_type="heart"
             app:liked="true"
             app:is_enabled="true"
-            android:visibility="visible"/>
+            android:visibility="gone"/>
+
+        <Button
+            android:id="@+id/btn_add_new_visit"
+            android:background="@drawable/login_button"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:text="@string/add_new_visit"
+            android:textAllCaps="false"
+            android:textStyle="bold"
+            android:textSize="@dimen/browser_actions_context_menu_min_padding"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.70"
+            android:visibility="gone"
+            android:clickable="true"
+            android:focusable="true"/>
+        <Button
+            android:id="@+id/btn_view_my_visits"
+            android:background="@drawable/login_button"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:text="@string/view_my_visits"
+            android:textAllCaps="false"
+            android:textStyle="bold"
+            android:clickable="true"
+            android:textSize="@dimen/browser_actions_context_menu_min_padding"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_add_new_visit"
+            app:layout_constraintVertical_bias="0.25"
+            android:visibility="gone"
+            android:focusable="true" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

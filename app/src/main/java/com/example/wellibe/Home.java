@@ -14,7 +14,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 
 public class Home extends WelliBeActivity {
 
-    ActivityHomeBinding binding;
+    static ActivityHomeBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

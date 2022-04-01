@@ -52,7 +52,7 @@ public class VisitsRecyclerAdapter extends FirestoreRecyclerAdapter<Visit, Visit
                 db.collection("Users").document(mAuth.getUid()).collection("Visits")
                         .document(visitID).update("loved", true);
                 if (model.getDoc_id() != "")
-                    db.collection("users").document(model.getDoc_id()).update("Hearts received", FieldValue.increment(1));
+                    db.collection("Users").document(model.getDoc_id()).update("Hearts received", FieldValue.increment(1));
             }
 
             @Override
@@ -60,7 +60,7 @@ public class VisitsRecyclerAdapter extends FirestoreRecyclerAdapter<Visit, Visit
                 db.collection("Users").document(mAuth.getUid()).collection("Visits")
                         .document(visitID).update("loved", false);
                 if (model.getDoc_id() != "")
-                    db.collection("users").document(model.getDoc_id()).update("Hearts received", FieldValue.increment(-1));
+                    db.collection("Users").document(model.getDoc_id()).update("Hearts received", FieldValue.increment(-1));
             }
         });
         holder.itemView.setOnClickListener(new View.OnClickListener() {

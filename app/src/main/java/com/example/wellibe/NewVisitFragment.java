@@ -56,7 +56,12 @@ public class NewVisitFragment extends WelliBeFragment {
             @Override
             public void onClick(View view) {
                 binding.fabNewVisit.setEnabled(false);
-                addNewVisitToDB();
+                if (binding.etVisitSummary.getText().toString().isEmpty()) {
+                    Toast.makeText(getActivity(), "Visit summary is empty, please fill in the text box", Toast.LENGTH_SHORT).show();
+                    binding.fabNewVisit.setEnabled(true);
+                } else {
+                    addNewVisitToDB();
+                }
             }
         });
         binding.ivCodeScanner.setOnClickListener(new View.OnClickListener() {
@@ -90,7 +95,6 @@ public class NewVisitFragment extends WelliBeFragment {
                                     startActivity(intent);
                                 }
                             });
-
                     snackbar.show();
                 }
                 clicked_scanner_yet = true;

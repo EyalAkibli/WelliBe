@@ -34,9 +34,6 @@ public class MyVisitsFragment extends WelliBeFragment {
         binding = FragmentMyVisitsBinding.inflate(inflater, container, false);
         Query query = visitsRef.orderBy("time_stamp", Query.Direction.DESCENDING);
         setUpRecyclerView(binding.recyclerVisits, query);
-        if (visitsAdapter.getItemCount() == 0) {
-            Toast.makeText(getActivity(), "No visits were documented yet.", Toast.LENGTH_LONG).show();
-        }
         return binding.getRoot();
     }
 

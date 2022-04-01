@@ -8,7 +8,6 @@
     android:layout_height="match_parent"
     tools:context=".NewVisitFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
         android:id="@+id/tv_data_n_time"
         android:layout_width="wrap_content"
@@ -33,11 +32,11 @@
         android:layout_height="wrap_content"
         android:clickable="true"
         android:focusable="true"
-        android:src="@drawable/ic_baseline_qr_code_scanner_48"
-        android:layout_marginStart="10dp"
+        android:src="@drawable/ic_baseline_qr_code_scanner_64"
         app:layout_anchor="@id/tv_doctor_name"
-        app:layout_anchorGravity="center_horizontal|bottom"
-        android:layout_gravity="bottom|center"
+        app:layout_anchorGravity="end|bottom"
+        android:layout_gravity="end|center_vertical"
+
         />
 
     <EditText
@@ -47,7 +46,9 @@
         android:layout_margin="32dp"
         android:inputType="textMultiLine"
         android:lines="14"
-        android:layout_gravity="center_vertical"
+        android:layout_gravity="center_vertical|bottom"
+        app:layout_anchorGravity="bottom"
+        app:layout_anchor="@id/iv_code_scanner"
         android:gravity="top"
         android:hint="@string/new_visit_summary_prompt"
         android:background="@drawable/custom_et"
