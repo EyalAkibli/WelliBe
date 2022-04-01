@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -75,8 +76,10 @@ public class QRcodeScanner extends WelliBeActivity {
                                     if (task.isSuccessful()) {
                                         final DocumentSnapshot doc = task.getResult();
                                         if (doc.exists()) {
-                                            String dr_name = "Dr " + doc.getString("Full name");
+                                            String dr_name = "Dr. " + doc.getString("Full name");
                                             scannedTV.setText(dr_name);
+                                            NewVisitFragment.binding.tvDoctorName.setText(dr_name);
+                                            finish();
                                         } else {
                                             scannedTV.setText("QR code is not a known doctor's code");
                                         }
@@ -86,7 +89,6 @@ public class QRcodeScanner extends WelliBeActivity {
                 } else {
                     scannedTV.setText("QR code is not a doctor's code");
                 }
-                //finish();
             }
         });
     }

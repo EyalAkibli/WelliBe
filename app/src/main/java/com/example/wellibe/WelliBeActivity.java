@@ -180,7 +180,7 @@ public class WelliBeActivity extends AppCompatActivity {
 
     public static String getTimeDate(long timestamp) {
             Date netDate = (new Date(timestamp));
-            SimpleDateFormat sfd = new SimpleDateFormat("EEE, yyyy.MM.dd G 'at' HH:mm:ss", Locale.getDefault());
+            SimpleDateFormat sfd = new SimpleDateFormat("HH:mm\nEEE, dd.MM.yyyy");
             return sfd.format(netDate);
     }
 }
