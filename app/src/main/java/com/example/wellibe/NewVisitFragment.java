@@ -38,10 +38,11 @@ import java.util.Map;
 
 public class NewVisitFragment extends WelliBeFragment {
 
-    FragmentNewVisitBinding binding;
+    public static FragmentNewVisitBinding binding;
     Map<String, Object> visit = new HashMap<>();
     Long milliSecTime;
     boolean clicked_scanner_yet = false;
+    String doctor_name = "";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -63,6 +64,7 @@ public class NewVisitFragment extends WelliBeFragment {
                 if (checkPermission()) {
                     // You can use the API that requires the permission.
                     clicked_scanner_yet = false;
+                    binding.tvDoctorName.setText(getResources().getString(R.string.scan_dr_qr_code));
                     Intent i = new Intent(getContext(), QRcodeScanner.class);
                     startActivity(i);
                 } else {
@@ -98,8 +100,14 @@ public class NewVisitFragment extends WelliBeFragment {
 
     private void addNewVisitToDB() {
         visit.put("time_stamp", milliSecTime);
-        visit.put("doc_name", binding.etDocName.getText().toString());
         visit.put("summary", binding.etVisitSummary.getText().toString());
+        visit.put("loved", false);
+        String doc_name = binding.tvDoctorName.getText().toString();
+        if (doc_name.equals(getResources().getString(R.string.scan_dr_qr_code)) || doc_name.equals("")) {
+            visit.put("doc_name", "Unknown");
+        } else {
+            visit.put("doc_name", binding.tvDoctorName.getText().toString());
+        }
         WelliBeActivity.db.collection("Users").document(mAuth.getCurrentUser().getUid()).
                 collection("Visits").add(visit).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
             @Override
@@ -124,6 +132,7 @@ public class NewVisitFragment extends WelliBeFragment {
                 @Override
                 public void onActivityResult(Map<String, Boolean> result) {
                     if (result.get(CAMERA)) {
+                        binding.tvDoctorName.setText(getResources().getString(R.string.scan_dr_qr_code));
                         Intent i = new Intent(getContext(), QRcodeScanner.class);
                         startActivity(i);
                     } else if (shouldShowRequestPermissionRationale(CAMERA)) {

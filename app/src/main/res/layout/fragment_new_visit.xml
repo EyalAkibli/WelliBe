@@ -19,7 +19,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
-        android:id="@+id/et_doc_name"
+        android:id="@+id/tv_doctor_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="@string/scan_dr_qr_code"
@@ -35,7 +35,7 @@
         android:focusable="true"
         android:src="@drawable/ic_baseline_qr_code_scanner_48"
         android:layout_marginStart="10dp"
-        app:layout_anchor="@id/et_doc_name"
+        app:layout_anchor="@id/tv_doctor_name"
         app:layout_anchorGravity="center_horizontal|bottom"
         android:layout_gravity="bottom|center"
         />

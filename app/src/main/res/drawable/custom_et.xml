@@ -4,6 +4,10 @@
         <shape android:shape="rectangle">
             <stroke android:width="3dp" android:color="@color/colorSecondaryDark" />
             <corners android:radius="10dp"/>
+            <!-- View background color -->
+            <solid
+                android:color="@color/colorPrimaryLight" >
+            </solid>
         </shape>
     </item>
 </selector>

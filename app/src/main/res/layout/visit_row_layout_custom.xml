@@ -1,0 +1,78 @@
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="16dp"
+    android:layout_marginStart="12dp"
+    android:layout_marginEnd="8dp"
+    app:cardBackgroundColor="@color/colorPrimaryLight"
+    app:cardElevation="12dp"
+    app:cardCornerRadius="20dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="2dp">
+
+        <TextView
+            android:id="@+id/tv_data_n_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_doctor_name"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/josefin_sans_bold"
+            android:hint="dd/mm/yy hh:mm"
+            android:maxLines="2"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/tv_doctor_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="5dp"
+            android:layout_toStartOf="@id/tv_visit_summary"
+            android:ellipsize="end"
+            android:hint="Dr. Who"
+            android:maxLines="2"
+            android:padding="5dp"
+            android:textStyle="italic"
+            app:layout_constraintHorizontal_bias="0.05" />
+        <!--            android:background="@drawable/summary_textview_for_card"-->
+        <TextView
+            android:id="@+id/tv_visit_summary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/btn_heart"
+            android:layout_alignParentTop="true"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="4dp"
+            android:layout_toStartOf="@id/btn_heart"
+            android:layout_toEndOf="@id/tv_data_n_time"
+            android:ellipsize="end"
+            android:hint="visit summary"
+            android:maxLines="4"
+            android:textSize="12sp" />
+
+        <com.like.LikeButton
+            android:id="@+id/btn_heart"
+            android:layout_width="50dp"
+            android:layout_height="55dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="10dp"
+            app:anim_scale_factor="20"
+            app:circle_end_color="@color/colorSecondaryLight"
+            app:circle_start_color="#F1DD31"
+            app:dots_primary_color="#0E77CC"
+            app:dots_secondary_color="#FF1A4F"
+            app:icon_size="10dp"
+            app:icon_type="heart"
+            app:is_enabled="true"
+            app:liked="false" />
+
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>
