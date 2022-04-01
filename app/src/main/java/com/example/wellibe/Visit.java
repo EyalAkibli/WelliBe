@@ -9,15 +9,25 @@ public class Visit {
     String doc_name;
     String summary;
     boolean loved;
+    String doc_id;
 
-    public Visit(long time_stamp, String doc_name, String summary, boolean loved) {
+    public Visit(long time_stamp, String doc_name, String summary, boolean loved, String doc_id) {
         this.time_stamp = time_stamp;
         this.doc_name = doc_name;
         this.summary = summary;
         this.loved = loved;
+        this.doc_id = doc_id;
     }
 
     public Visit() {
+    }
+
+    public String getDoc_id() {
+        return doc_id;
+    }
+
+    public void setDoc_id(String doc_id) {
+        this.doc_id = doc_id;
     }
 
     public long getTime_stamp() {

@@ -3,16 +3,7 @@ package com.example.wellibe;
 import static com.example.wellibe.WelliBeActivity.connectivityFlag;
 import static com.example.wellibe.WelliBeActivity.mAuth;
 
-import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
-import android.os.Binder;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.text.Spannable;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
@@ -23,6 +14,9 @@ import android.widget.AdapterView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.example.wellibe.databinding.FragmentSignUpBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -30,17 +24,10 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.EmailAuthProvider;
-import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
-import com.google.firebase.auth.GoogleAuthProvider;
-import com.google.firebase.auth.SignInMethodQueryResult;
-import com.google.firebase.firestore.DocumentReference;
 
 import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
 import java.util.Map;
-import java.util.Objects;
 
 
 public class SignUpFragment extends WelliBeFragment {
@@ -70,7 +57,6 @@ public class SignUpFragment extends WelliBeFragment {
                     } else { // i == 2
                         WelliBeActivity.job = WelliBeActivity.Job.DOCTOR;
                     }
-                    Toast.makeText(getActivity(), ((TextView) adapterView.getChildAt(0)).getText(), Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -100,8 +86,8 @@ public class SignUpFragment extends WelliBeFragment {
                         Toast.makeText(getActivity(),
                                 "'Password Confirmation' Doesn't Match 'Password'.", Toast.LENGTH_LONG).show();
                     } else {
-                        createAccount(fullName, email, password);
                         binding.btnRegister.setEnabled(false);
+                        createAccount(fullName, email, password);
                     }
                 }
             }
@@ -111,7 +97,6 @@ public class SignUpFragment extends WelliBeFragment {
         int start = signInOffer.indexOf("S");
         int end = signInOffer.indexOf(".");
         binding.tvSignInOffer.setMovementMethod(LinkMovementMethod.getInstance());
-        //binding.tvSignInOffer.setText(signInOffer, TextView.BufferType.SPANNABLE);
         ClickableSpan myClickableSpan = new ClickableSpan() {
             @Override
             public void onClick(@NonNull View view) {
@@ -153,12 +138,12 @@ public class SignUpFragment extends WelliBeFragment {
                                             mAuth.getCurrentUser().delete();
                                             Toast.makeText(getContext(), "Unexpected error has occurred. Please restart the application.",
                                                     Toast.LENGTH_LONG).show();
+                                            binding.btnRegister.setEnabled(true);
                                             getActivity().finishAffinity();
                                         }
                                     });
                                 }
                             });
-                    //addData(userName, email);
 
                 } else {
                     if (task.getException() instanceof FirebaseAuthUserCollisionException) {
@@ -168,6 +153,7 @@ public class SignUpFragment extends WelliBeFragment {
                         Toast.makeText(getActivity(), "Authentication failed. Please try again",
                                 Toast.LENGTH_LONG).show();
                     }
+                    binding.btnRegister.setEnabled(true);
                 }
             }
         });

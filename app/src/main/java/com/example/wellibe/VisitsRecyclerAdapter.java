@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.like.LikeButton;
 import com.like.OnLikeListener;
 
@@ -50,12 +51,16 @@ public class VisitsRecyclerAdapter extends FirestoreRecyclerAdapter<Visit, Visit
             public void liked(LikeButton likeButton) {
                 db.collection("Users").document(mAuth.getUid()).collection("Visits")
                         .document(visitID).update("loved", true);
+                if (model.getDoc_id() != "")
+                    db.collection("users").document(model.getDoc_id()).update("Hearts received", FieldValue.increment(1));
             }
 
             @Override
             public void unLiked(LikeButton likeButton) {
                 db.collection("Users").document(mAuth.getUid()).collection("Visits")
                         .document(visitID).update("loved", false);
+                if (model.getDoc_id() != "")
+                    db.collection("users").document(model.getDoc_id()).update("Hearts received", FieldValue.increment(-1));
             }
         });
         holder.itemView.setOnClickListener(new View.OnClickListener() {

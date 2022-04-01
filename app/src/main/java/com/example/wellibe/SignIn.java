@@ -56,21 +56,21 @@ public class SignIn extends WelliBeActivity {
     public static boolean isValidLoginInput(Context context, String email, String password) {
         if (email.isEmpty()) {
             Toast.makeText(context, "Email is required. Please try again",
-                    Toast.LENGTH_SHORT).show();
+                    Toast.LENGTH_LONG).show();
             return false;
         }
         if (password.isEmpty()) {
             Toast.makeText(context, "Password is required. Please try again",
-                    Toast.LENGTH_SHORT).show();
+                    Toast.LENGTH_LONG).show();
             return false;
         }
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             Toast.makeText(context, "Invalid email. Please try again",
-                    Toast.LENGTH_SHORT).show();
+                    Toast.LENGTH_LONG).show();
             return false;
         }
         if (password.length() < 6) {
-            Toast.makeText(context, "Minimum length of password is 6", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Minimum length of password is 6 chars", Toast.LENGTH_LONG).show();
             return false;
         }
         return true;

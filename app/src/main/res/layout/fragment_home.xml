@@ -26,8 +26,38 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_margin="80dp"
+            android:layout_margin="130dp"
             android:contentDescription="@string/qr_code" />
+
+        <TextView
+            android:id="@+id/tv_hearts_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_qr_code"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias="0.15"
+            android:textColor="@color/colorSecondaryDark"
+            android:textSize="24sp"/>
+
+        <com.like.LikeButton
+            android:id="@+id/btn_heart"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_hearts_count"
+            app:anim_scale_factor="4"
+            app:circle_end_color="@color/colorSecondaryLight"
+            app:circle_start_color="#F1DD31"
+            app:dots_primary_color="#0E77CC"
+            app:dots_secondary_color="#FF1A4F"
+            app:icon_size="20dp"
+            app:icon_type="heart"
+            app:liked="true"
+            app:is_enabled="true"
+            android:visibility="visible"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

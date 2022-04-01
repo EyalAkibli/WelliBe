@@ -43,6 +43,7 @@ public class NewVisitFragment extends WelliBeFragment {
     Long milliSecTime;
     boolean clicked_scanner_yet = false;
     String doctor_name = "";
+    static String doctor_id = "";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -102,6 +103,7 @@ public class NewVisitFragment extends WelliBeFragment {
         visit.put("time_stamp", milliSecTime);
         visit.put("summary", binding.etVisitSummary.getText().toString());
         visit.put("loved", false);
+        visit.put("doc_id", doctor_id);
         String doc_name = binding.tvDoctorName.getText().toString();
         if (doc_name.equals(getResources().getString(R.string.scan_dr_qr_code)) || doc_name.equals("")) {
             visit.put("doc_name", "Unknown");

@@ -79,14 +79,17 @@ public class QRcodeScanner extends WelliBeActivity {
                                             String dr_name = "Dr. " + doc.getString("Full name");
                                             scannedTV.setText(dr_name);
                                             NewVisitFragment.binding.tvDoctorName.setText(dr_name);
+                                            NewVisitFragment.doctor_id = data;
                                             finish();
                                         } else {
+                                            NewVisitFragment.doctor_id = "";
                                             scannedTV.setText("QR code is not a known doctor's code");
                                         }
                                     }
                                 }
                             });
                 } else {
+                    NewVisitFragment.doctor_id = "";
                     scannedTV.setText("QR code is not a doctor's code");
                 }
             }
@@ -118,18 +121,5 @@ public class QRcodeScanner extends WelliBeActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
-//    private void requestPermission() {
-//        // this method is to request
-//        // the runtime permission.
-//        int PERMISSION_REQUEST_CODE = 200;
-//        ActivityCompat.requestPermissions(this, new String[]{CAMERA, VIBRATE}, PERMISSION_REQUEST_CODE);
-//    }
-//
-//    private boolean checkPermission() {
-//        int camera_permission = ContextCompat.checkSelfPermission(getApplicationContext(), CAMERA);
-//        int vibrate_permission = ContextCompat.checkSelfPermission(getApplicationContext(), VIBRATE);
-//        return camera_permission == PackageManager.PERMISSION_GRANTED && vibrate_permission == PackageManager.PERMISSION_GRANTED;
-//    }
 
 }
