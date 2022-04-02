@@ -119,7 +119,7 @@ public class NewVisitFragment extends WelliBeFragment {
             @Override
             public void onComplete(@NonNull Task<DocumentReference> task) {
                 binding.fabNewVisit.setEnabled(true);
-                //reload fragment
+                Toast.makeText(getActivity(), "Visit recorded.", Toast.LENGTH_SHORT).show();
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.drawer_layout_fragment_container,
                         new NewVisitFragment()).commit();
             }
