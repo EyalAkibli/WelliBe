@@ -5,6 +5,7 @@ import static com.example.wellibe.WelliBeActivity.mAuth;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,9 +19,12 @@ import com.example.wellibe.databinding.FragmentMyVisitsBinding;
 import com.example.wellibe.databinding.FragmentNewVisitBinding;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class MyVisitsFragment extends WelliBeFragment {
 
@@ -33,6 +37,14 @@ public class MyVisitsFragment extends WelliBeFragment {
                              Bundle savedInstanceState) {
         binding = FragmentMyVisitsBinding.inflate(inflater, container, false);
         Query query = visitsRef.orderBy("time_stamp", Query.Direction.DESCENDING);
+        query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful() && task.getResult().isEmpty()) {
+                    Toast.makeText(getActivity(), "No visits recorded yet!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
         setUpRecyclerView(binding.recyclerVisits, query);
         return binding.getRoot();
     }

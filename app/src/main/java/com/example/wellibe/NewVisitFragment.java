@@ -142,7 +142,7 @@ public class NewVisitFragment extends WelliBeFragment {
                         Intent i = new Intent(getContext(), QRcodeScanner.class);
                         startActivity(i);
                     } else if (shouldShowRequestPermissionRationale(CAMERA)) {
-                        Toast.makeText(getActivity(), "Scan is possible only with camera permission", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Scan is possible only with camera permission", Toast.LENGTH_LONG).show();
                     }
                 }
             });

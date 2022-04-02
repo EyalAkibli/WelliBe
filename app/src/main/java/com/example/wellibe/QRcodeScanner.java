@@ -52,7 +52,6 @@ public class QRcodeScanner extends WelliBeActivity {
             @Override
             public void onScannerStopped(ScannerLiveView scanner) {
                 // method is called when scanner is stopped.
-                //Toast.makeText(QRcodeScanner.this, "Scanner Stopped", Toast.LENGTH_SHORT).show();
 
             }
 
