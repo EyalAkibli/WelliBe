@@ -29,7 +29,7 @@ public class Home extends WelliBeActivity {
                     beginTransaction().replace(R.id.drawer_layout_fragment_container, new HomeFragment()).commit();
             //binding.navigationView.setCheckedItem(R.id.home);
         }
-
+        binding.navigationView.getMenu().findItem(R.id.help).setVisible(false);
         initToolbar();
         setupDrawerContentActions(findViewById(R.id.navigation_view));
         setDoctorPatientDrawerUI();

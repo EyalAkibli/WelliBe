@@ -5,6 +5,8 @@ import static android.Manifest.permission.VIBRATE;
 import static com.example.wellibe.WelliBeActivity.mAuth;
 
 import android.Manifest;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -14,6 +16,7 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -101,6 +104,22 @@ public class NewVisitFragment extends WelliBeFragment {
             }
         });
         return binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        new AlertDialog.Builder(getContext())
+                .setTitle("Please Be Advised!")
+                .setMessage("You are about to enter your sensitive-personal medical information.")
+
+                // Specifying a listener allows you to take an action before dismissing the dialog.
+                // The dialog is automatically dismissed when a dialog button is clicked.
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Continue with delete operation
+                    }
+                }).setIcon(R.drawable.ic_baseline_warning_36).show();
     }
 
     private void addNewVisitToDB() {

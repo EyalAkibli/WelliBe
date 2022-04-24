@@ -25,9 +25,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.firestore.DocumentSnapshot;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 
 public class SignUpFragment extends WelliBeFragment {
@@ -56,6 +58,8 @@ public class SignUpFragment extends WelliBeFragment {
                         WelliBeActivity.job = WelliBeActivity.Job.PATIENT;
                     } else { // i == 2
                         WelliBeActivity.job = WelliBeActivity.Job.DOCTOR;
+                        Toast.makeText(getActivity(),
+                                "Your email must be associated with a hospital.", Toast.LENGTH_LONG).show();
                     }
                 }
             }
@@ -69,15 +73,20 @@ public class SignUpFragment extends WelliBeFragment {
             @Override
             public void onClick(View view) {
                 if (!connectivityFlag) {
-                    Toast.makeText(getActivity(), "Make sure you have an Internet Connection and then restart PubLeague.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "Make sure you have an Internet Connection and then restart WelliBe.", Toast.LENGTH_LONG).show();
                 } else {
                     String fullName = binding.etFullName.getText().toString();
                     String email = binding.etEmail.getText().toString();
                     String password = binding.etPass.getText().toString();
                     String confirmPass = binding.etConfirmPass.getText().toString();
+                    String hospitalStr = "^\\w+@rambam.com";
+                    Pattern uidPattern = Pattern.compile(hospitalStr);
                     if (WelliBeActivity.job == WelliBeActivity.Job.NOT_SELECTED) {
                         Toast.makeText(getActivity(),
                                 "Please choose between patient and doctor", Toast.LENGTH_SHORT).show();
+                    } else if (WelliBeActivity.job == WelliBeActivity.Job.DOCTOR && !uidPattern.matcher(email).matches()) {
+                        Toast.makeText(getActivity(),
+                                "Doctor email form: <youremail@rambam.com>", Toast.LENGTH_LONG).show();
                     } else if (email.trim().isEmpty() || password.trim().isEmpty() || fullName.trim().isEmpty()
                             || confirmPass.trim().isEmpty()) {
                         Toast.makeText(getActivity(),
