@@ -5,7 +5,7 @@
 ### This is a *WIP* application.
 
 WelliBe is a hospital platform with a goal to decrease medical staff burnout.
-This is a major issue with costs each year in the US alone 14-17$ USD.
+This is a major issue with costs each year in the US alone 14-17 billion $.
 
 This app aspire to achieve:
 * Improvement in medical attention efficiency.
